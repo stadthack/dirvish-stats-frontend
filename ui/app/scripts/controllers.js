@@ -74,6 +74,10 @@ angular.module('dirvishStatsApp')
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+    var onBarClick = function(image) {
+      location.hash = '#/hosts/' + hostId + '/files/' + image.id
+    };
+
     $scope.$watch("trendImages", function(data) {
 
       x.domain(data.map(function(d) { return (new Date(d.time)).toLocaleDateString(); }));
@@ -97,7 +101,8 @@ angular.module('dirvishStatsApp')
           .attr("x", function(d) { return x(d.time); })
           .attr("width", x.rangeBand())
           .attr("y", function(d) { return y(d.sum); })
-          .attr("height", function(d) { return height - y(d.sum); });
+          .attr("height", function(d) { return height - y(d.sum); })
+          .on("click", onBarClick);
     });
   })
   .controller('FilesCtrl', function($scope, $routeParams, $http) {
