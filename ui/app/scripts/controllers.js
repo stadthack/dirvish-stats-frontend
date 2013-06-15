@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dirvishStatsApp')
-  .controller('MainCtrl', function($routeParams, $scope, $http) {
+  .controller('MainCtrl', function($scope, $routeParams, $http) {
     $scope.$routeParams = $routeParams;
     $scope.hosts = [];
     $http({method: "GET", url: "hosts.json"}).success(function(data) {
@@ -10,7 +10,7 @@ angular.module('dirvishStatsApp')
   })
   .controller('HostsNavCtrl', function($scope) {
   })
-  .controller('ImagesCtrl', function($scope, $routeParams) {
+  .controller('ImagesCtrl', function($scope, $routeParams, $http) {
     var hostId = $routeParams.hostId;
     if (hostId) {
       for (var i = 0; i < $scope.hosts.length; i++) {
@@ -21,4 +21,9 @@ angular.module('dirvishStatsApp')
         }
       };
     }
+
+    $scope.trendImages = []
+    $http({method: "GET", url: "trends.json"}).success(function(data) {
+      $scope.trendImages = data.images;
+    });
   });
