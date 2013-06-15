@@ -5,6 +5,10 @@ body {
   margin-top: 60px;
 }
 
+.shade {
+  color: #bbb;
+}
+
 .axis path,
 .axis line {
   fill: none;
