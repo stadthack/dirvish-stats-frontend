@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dirvishStatsApp')
-  .controller('ImagesCtrl', function($scope, $routeParams, $http, barChart) {
+  .controller('ImagesCtrl', function($scope, $routeParams, $http) {
     var hostId = $routeParams.hostId;
 
     var findHost = function(hosts, hostId) {
@@ -18,6 +18,7 @@ angular.module('dirvishStatsApp')
     };
 
     $scope.trendImages = [];
+    // TODO: Use promise
     $http.get("/trends?hostname=" + hostId).success(function(data) {
       $scope.trendImages = data.images;
     });
@@ -27,5 +28,4 @@ angular.module('dirvishStatsApp')
       $scope.images = $scope.host ? $scope.host.images : [];
     });
 
-    barChart.draw($scope, $routeParams, "#trend-images-graph");
   })
