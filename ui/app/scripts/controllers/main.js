@@ -5,7 +5,7 @@ angular.module('dirvishStatsApp')
     $scope.$routeParams = $routeParams;
     $scope.$state = $state;
     $scope.hosts = [];
-    $http.get("/hosts").success(function(data) {
+    $http.get(API_SERVER + "/hosts").success(function(data) {
       $scope.hosts = data.hosts;
     });
   })

@@ -19,7 +19,7 @@ angular.module('dirvishStatsApp')
 
     $scope.trendImages = [];
     // TODO: Use promise
-    $http.get("/trends?hostname=" + hostId).success(function(data) {
+    $http.get(API_SERVER + "/trends?hostname=" + hostId).success(function(data) {
       $scope.trendImages = data.images;
     });
 
