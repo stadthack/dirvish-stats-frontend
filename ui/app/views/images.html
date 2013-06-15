@@ -2,15 +2,16 @@
 
 <hr>
 
+<h2>Images</h2>
+
 <table>
-  <thead>
-    <tr>
-      <th>Image</th>
-    </tr>
-  </thead>
   <tbody>
     <tr ng-repeat="image in images">
-      <td>{{image.name}}</td>
+      <td>
+        <a ng-href="{{'#/hosts/' + host.name + '/files/' + image.id}}">
+          {{image.name}}
+        </a>
+      </td>
     </tr>
   </tbody>
 </table>

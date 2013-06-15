@@ -11,6 +11,10 @@ angular.module('dirvishStatsApp', [])
         templateUrl: 'views/images.html',
         controller: 'ImagesCtrl'
       })
+      .when('/hosts/:hostId/files/:imageId', {
+        templateUrl: 'views/files.html',
+        controller: 'FilesCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

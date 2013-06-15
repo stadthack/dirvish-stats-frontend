@@ -4,7 +4,7 @@ angular.module('dirvishStatsApp')
   .controller('MainCtrl', function($scope, $routeParams, $http) {
     $scope.$routeParams = $routeParams;
     $scope.hosts = [];
-    $http({method: "GET", url: "http://fs1.phimobile.com:8000/hosts"}).success(function(data) {
+    $http.get("http://fs1.phimobile.com:8000/hosts").success(function(data) {
       $scope.hosts = data.hosts;
     });
   })
@@ -98,5 +98,13 @@ angular.module('dirvishStatsApp')
           .attr("width", x.rangeBand())
           .attr("y", function(d) { return y(d.sum); })
           .attr("height", function(d) { return height - y(d.sum); });
+    });
+  })
+  .controller('FilesCtrl', function($scope, $routeParams, $http) {
+    var hostId = $routeParams.hostId;
+    var imageId = $routeParams.imageId;
+    var size = $scope.size = 10;
+    $http.get("http://fs1.phimobile.com:8000/top?hostname=" + hostId + "&image=" + imageId + "&size=100").success(function(data) {
+      $scope.files = data.files;
     });
   });

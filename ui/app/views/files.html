@@ -1,0 +1,18 @@
+<h3>Top {{size}} largest files</h3>
+
+<input type="range" min="5" max="100" ng-model="size">
+
+<table>
+  <thead>
+    <tr>
+      <th>Size</th>
+      <th>File</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="file in files | limitTo: size">
+      <td>{{file.size}}</td>
+      <td>{{file.name}}</td>
+    </tr>
+  </tbody>
+</table>
