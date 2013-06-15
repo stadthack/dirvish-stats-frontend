@@ -1,5 +1,5 @@
 {
-    "host": "fs1",
+    "host": "beamdb1",
     "images": [
         {
             "time": "2013-02-17 22:00:00",
