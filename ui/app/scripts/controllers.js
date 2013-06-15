@@ -31,7 +31,7 @@ angular.module('dirvishStatsApp')
     // D3
     //
 
-    var margin = {top: 20, right: 20, bottom: 30, left: 80},
+    var margin = {top: 20, right: 20, bottom: 80, left: 80},
         width = 720 - margin.left - margin.right,
         height = 320 - margin.top - margin.bottom;
 
@@ -70,13 +70,15 @@ angular.module('dirvishStatsApp')
         d.sum = +d.sum;
       });
 
-      x.domain(data.map(function(d, i) { return i; }));
+      x.domain(data.map(function(d) { return (new Date(d.time)).toLocaleDateString(); }));
       y.domain([0, d3.max(data, function(d) { return d.sum; })]);
 
       svg.append("g")
           .attr("class", "x axis")
           .attr("transform", "translate(0," + height + ")")
-          .call(xAxis);
+          .call(xAxis)
+          .selectAll('text')
+          .attr("transform", " translate(-13, 40) rotate(-90)");
 
       svg.append("g")
           .attr("class", "y axis")
