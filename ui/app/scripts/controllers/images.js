@@ -18,7 +18,7 @@ angular.module('dirvishStatsApp')
     };
 
     $scope.trendImages = [];
-    $http.get("http://fs1.phimobile.com:8000/trends?hostname=" + hostId).success(function(data) {
+    $http.get("/trends?hostname=" + hostId).success(function(data) {
       $scope.trendImages = data.images;
     });
 
