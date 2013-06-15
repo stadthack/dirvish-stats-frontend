@@ -24,8 +24,39 @@
       <script src="components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
+    <div class="navbar navbar-inverse navbar-fixed-top">
+       <div class="navbar-inner">
+         <div class="container">
+           <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+           </button>
+           <a class="brand" href="#">dirvish stats</a>
+           <div class="nav-collapse collapse">
+             <ul class="nav">
+               <li class="active"><a href="#">Hosts</a></li>
+             </ul>
+           </div><!--/.nav-collapse -->
+         </div>
+       </div>
+     </div>
+
     <!-- Add your site or application content here -->
-    <div class="container" ng-view></div>
+    <div id="container" class="container-fluid">
+      <div class="row-fluid">
+        <div class="span2">
+          <ul class="nav nav-list" ng-controller="HostsNavCtrl" ng-cloak>
+            <li class="nav-header">Hosts</li>
+            <li ng-repeat="host in hosts">
+              <a ng-href="#/hosts/{{host.name}}/images">{{host.name}}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="span10" ng-view>
+        </div>
+  </div>
+    </div>
 
     <script src="components/angular/angular.js"></script>
     <script src="components/angular-resource/angular-resource.js"></script>
@@ -33,7 +64,7 @@
 
     <!-- build:js scripts/scripts.js -->
     <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers.js"></script>
     <!-- endbuild -->
 
   </body>

@@ -4,8 +4,12 @@ angular.module('dirvishStatsApp', [])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/images.html',
+        controller: 'ImagesCtrl'
+      })
+      .when('/hosts/:hostId/images', {
+        templateUrl: 'views/images.html',
+        controller: 'ImagesCtrl'
       })
       .otherwise({
         redirectTo: '/'
