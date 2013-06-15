@@ -4,7 +4,7 @@ angular.module('dirvishStatsApp')
   .controller('MainCtrl', function($scope, $routeParams, $http) {
     $scope.$routeParams = $routeParams;
     $scope.hosts = [];
-    $http({method: "GET", url: "hosts.json"}).success(function(data) {
+    $http({method: "GET", url: "http://fs1.phimobile.com:8000/hosts"}).success(function(data) {
       $scope.hosts = data.hosts;
     });
   })
@@ -23,7 +23,7 @@ angular.module('dirvishStatsApp')
     }
 
     $scope.trendImages = []
-    $http({method: "GET", url: "trends.json"}).success(function(data) {
+    $http({method: "GET", url: "http://fs1.phimobile.com:8000/trends?hostname="+hostId}).success(function(data) {
       $scope.trendImages = data.images;
     });
 
@@ -66,9 +66,6 @@ angular.module('dirvishStatsApp')
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     $scope.$watch("trendImages", function(data) {
-      data.forEach(function(d) {
-        d.sum = +d.sum;
-      });
 
       x.domain(data.map(function(d) { return (new Date(d.time)).toLocaleDateString(); }));
       y.domain([0, d3.max(data, function(d) { return d.sum; })]);
@@ -83,12 +80,6 @@ angular.module('dirvishStatsApp')
       svg.append("g")
           .attr("class", "y axis")
           .call(yAxis)
-        .append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("y", 6)
-          .attr("dy", ".71em")
-          .style("text-anchor", "end")
-          .text("sum");
 
       svg.selectAll(".bar")
           .data(data)
