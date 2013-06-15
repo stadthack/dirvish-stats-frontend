@@ -13,7 +13,13 @@ body {
 }
 
 .bar {
-  fill: steelblue;
+  fill: #4682b4;
+  transition: 150ms;
+}
+
+.bar:hover {
+  cursor: pointer;
+  fill: #79b1e6;
 }
 
 .x.axis path {
