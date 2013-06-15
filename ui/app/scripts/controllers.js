@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('dirvishStatsApp')
-  .controller('MainCtrl', function($scope, $http) {
+  .controller('MainCtrl', function($routeParams, $scope, $http) {
+    $scope.$routeParams = $routeParams;
     $scope.hosts = [];
     $http({method: "GET", url: "hosts.json"}).success(function(data) {
       $scope.hosts = data.hosts;

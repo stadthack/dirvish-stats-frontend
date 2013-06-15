@@ -48,7 +48,7 @@
         <div class="span2">
           <ul class="nav nav-list" ng-controller="HostsNavCtrl" ng-cloak>
             <li class="nav-header">Hosts</li>
-            <li ng-repeat="host in hosts">
+            <li ng-repeat="host in hosts" ng-class="{active:$routeParams.hostId==host.name}">
               <a ng-href="#/hosts/{{host.name}}/images">{{host.name}}</a>
             </li>
           </ul>
