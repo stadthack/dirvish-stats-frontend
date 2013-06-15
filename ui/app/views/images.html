@@ -1,22 +1,6 @@
 <div ng-controller="ImagesCtrl">
-
+  <div class="nav-header">Images</div>
   <div bar-chart="trendImages"></div>
-
-  <h2>Images</h2>
-
-  <table>
-    <tbody>
-      <tr ng-repeat="image in images">
-        <td>
-          <a ng-href="#/hosts/{{$state.params.hostId}}/images/{{image.id}}">
-            {{image.name}}
-          </a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
-
 </div>
 
 <hr>
