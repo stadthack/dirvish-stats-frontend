@@ -38,7 +38,7 @@ angular.module('dirvishStatsApp')
           .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      scope.$watch("trendImages", function(data) {
+      scope.$watch(attr.barChart, function(data) {
         var onBarClick = function(image) {
           location.hash = '#/hosts/'+$state.params.hostId+'/images/'+image.id
         };
