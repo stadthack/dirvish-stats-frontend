@@ -35,7 +35,11 @@ angular.module('dirvishStatsApp')
         width = 960 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
-    var formatPercent = d3.format(".0%");
+    var formatHumanReadable = function(bytes) {
+      var s = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'];
+      var e = Math.floor(Math.log(bytes) / Math.log(1024));
+      return (bytes / Math.pow(1024, Math.floor(e))).toFixed(2) + " " + s[e];
+    };
 
     var x = d3.scale.ordinal()
         .rangeRoundBands([0, width], .1);
@@ -50,7 +54,7 @@ angular.module('dirvishStatsApp')
     var yAxis = d3.svg.axis()
         .scale(y)
         .orient("left")
-        .tickFormat(formatPercent);
+        .tickFormat(formatHumanReadable);
 
     var svg = d3.select("#trend-images-graph").append("svg")
         .attr("width", width + margin.left + margin.right)
