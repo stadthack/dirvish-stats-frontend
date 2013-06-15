@@ -17,6 +17,25 @@ angular.module('dirvishStatsApp')
           return (bytes / Math.pow(1024, Math.floor(e))).toFixed(2) + " " + s[e];
         };
 
+        function isValidDate(d) {
+          if ( Object.prototype.toString.call(d) !== "[object Date]" )
+            return false;
+          return !isNaN(d.getTime());
+        }
+
+        function formatDate(date) {
+          var d;
+          try {
+            d = new Date(date);
+            // Firefox 22 crashes on (new Date(date))
+          } catch(e) {}
+          if (isValidDate(d)) {
+            return d.toLocaleDateString();
+          } else {
+            return date.substring(0, 10);
+          }
+        };
+
         var x = d3.scale.ordinal()
             .rangeRoundBands([0, width], .1);
 
@@ -25,7 +44,8 @@ angular.module('dirvishStatsApp')
 
         var xAxis = d3.svg.axis()
             .scale(x)
-            .orient("bottom");
+            .orient("bottom")
+            .tickFormat(formatDate);
 
         var yAxis = d3.svg.axis()
             .scale(y)
@@ -39,11 +59,12 @@ angular.module('dirvishStatsApp')
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
       scope.$watch(attr.barChart, function(data) {
+
         var onBarClick = function(image) {
           location.hash = '#/hosts/'+$state.params.hostId+'/images/'+image.id
         };
 
-          x.domain(data.map(function(d) { return (new Date(d.time)).toLocaleDateString(); }));
+          x.domain(data.map(function(d) { return d.time; }));
           y.domain([0, d3.max(data, function(d) { return d.sum; })]);
 
           svg.append("g")
@@ -51,7 +72,7 @@ angular.module('dirvishStatsApp')
               .attr("transform", "translate(0," + height + ")")
               .call(xAxis)
               .selectAll('text')
-              .attr("transform", " translate(-13, 40) rotate(-90)");
+              .attr("transform", " translate(-13, 44) rotate(-90)");
 
           svg.append("g")
               .attr("class", "y axis")
