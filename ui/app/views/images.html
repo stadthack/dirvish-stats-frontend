@@ -1,17 +1,24 @@
-<div bar-chart="trendImages"></div>
+<div ng-controller="ImagesCtrl">
+
+  <div bar-chart="trendImages"></div>
+
+  <h2>Images</h2>
+
+  <table>
+    <tbody>
+      <tr ng-repeat="image in images">
+        <td>
+          <a ng-href="#/hosts/{{$state.params.hostId}}/images/{{image.id}}">
+            {{image.name}}
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+</div>
 
 <hr>
 
-<h2>Images</h2>
-
-<table>
-  <tbody>
-    <tr ng-repeat="image in images">
-      <td>
-        <a ng-href="{{'#/hosts/' + host.name + '/files/' + image.id}}">
-          {{image.name}}
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div ui-view="imagesDetail"></div>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dirvishStatsApp')
-  .directive('barChart', function($routeParams) {
+  .directive('barChart', function($state) {
     return {
       link: function(scope, el, attr) {
         var margin = {top: 20, right: 20, bottom: 80, left: 80},
@@ -38,10 +38,10 @@ angular.module('dirvishStatsApp')
           .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        scope.$watch(attr.barChart, function(data) {
-          var onBarClick = function(image) {
-            location.hash = '#/hosts/' + $routeParams.hostId + '/files/' + image.id
-          };
+      $scope.$watch("trendImages", function(data) {
+        var onBarClick = function(image) {
+          location.hash = '#/hosts/'+$state.params.hostId+'/images/'+image.id
+        };
 
           x.domain(data.map(function(d) { return (new Date(d.time)).toLocaleDateString(); }));
           y.domain([0, d3.max(data, function(d) { return d.sum; })]);

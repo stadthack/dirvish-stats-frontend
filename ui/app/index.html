@@ -49,17 +49,18 @@
         <div class="span2">
           <ul class="nav nav-list" ng-controller="HostsNavCtrl" ng-cloak>
             <li class="nav-header">Hosts</li>
-            <li ng-repeat="host in hosts" ng-class="{active:$routeParams.hostId==host.name}">
+            <li ng-repeat="host in hosts" ng-class="{active:$state.params.hostId==host.name}">
               <a ng-href="#/hosts/{{host.name}}/images">{{host.name}}</a>
             </li>
           </ul>
         </div>
-        <div class="span10" ng-view>
+        <div class="span10" ui-view="main">
         </div>
   </div>
     </div>
 
     <script src="components/angular/angular.js"></script>
+    <script src="components/ui-router/release/angular-ui-router.js"></script>
     <script src="components/angular-resource/angular-resource.js"></script>
     <script src="components/d3/d3.js"></script>
 

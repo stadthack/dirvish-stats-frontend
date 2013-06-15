@@ -1,24 +1,33 @@
 'use strict';
 
-angular.module('dirvishStatsApp', [])
-  .config(function($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/images.html',
-        controller: 'ImagesCtrl'
-      })
-      .when('/hosts/:hostId/images', {
-        templateUrl: 'views/images.html',
-        controller: 'ImagesCtrl'
-      })
-      .when('/hosts/:hostId/files/:imageId', {
-        templateUrl: 'views/files.html',
-        controller: 'FilesCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
+angular.module('dirvishStatsApp', ['ui.state'])
+  .config(function($stateProvider, $routeProvider) {
+    $stateProvider
+    .state('index', {
+      url: '',
+      views: {
+        'main': {
+          templateUrl: 'views/hosts.html'
+        }
+      }
+    })
+    .state('images', {
+      url: '/hosts/:hostId/images',
+      views: {
+        'main': {
+          templateUrl: 'views/images.html'
+        }
+      }
+    })
+    .state('images.detail', {
+      url: '/:imageId',
+      views: {
+        'imagesDetail': {
+          templateUrl: 'views/files.html'
+        }
+      }
+    });
   })
   .config(function($httpProvider) {
-    $httpProvider.defaults.headers.common["X-Requested-With"] = "";
+    $httpProvider.defaults.headers.common['X-Requested-With'] = '';
   });

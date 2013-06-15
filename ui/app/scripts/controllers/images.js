@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('dirvishStatsApp')
-  .controller('ImagesCtrl', function($scope, $routeParams, $http) {
-    var hostId = $routeParams.hostId;
+  .controller('ImagesCtrl', function($scope, $state, $http) {
+    var hostId = $state.params.hostId;
 
     var findHost = function(hosts, hostId) {
       if (!hosts.length || hostId == null) {
