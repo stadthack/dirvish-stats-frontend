@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dirvishStatsApp', [])
-  .config(function ($routeProvider) {
+  .config(function($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/images.html',
@@ -14,4 +14,7 @@ angular.module('dirvishStatsApp', [])
       .otherwise({
         redirectTo: '/'
       });
+  })
+  .config(function($httpProvider) {
+    $httpProvider.defaults.headers.common["X-Requested-With"] = "";
   });
