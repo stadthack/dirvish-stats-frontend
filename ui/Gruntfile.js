@@ -11,7 +11,7 @@ module.exports = function (grunt) {
   // configurable paths
   var yeomanConfig = {
     app: 'app',
-    dist: 'dist'
+    dist: '../../dirvish_server/dirvishserver/static'
   };
 
   try {
@@ -298,6 +298,23 @@ module.exports = function (grunt) {
     'rev',
     'usemin'
   ]);
+
+  grunt.registerTask('deploy', [
+    'clean:dist',
+    'coffee',
+    'useminPrepare',
+    'imagemin',
+    'cssmin',
+    'htmlmin',
+    'concat',
+    'copy',
+    'cdnify',
+    'ngmin',
+    'uglify',
+    'rev',
+    'usemin'
+  ]);
+
 
   grunt.registerTask('default', ['build']);
 };
