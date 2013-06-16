@@ -35,7 +35,7 @@ var breadcrumps = div.append("ul")
   .style("visibility", "hidden");
 breadcrumps.renderNode = function(node) {
   this.style("visibility", "visible");
-  this.selectAll("li").append("span").remove()
+  this.selectAll("li").remove();
   if(!node.depth) {
     this.append("li").text("/")
     return
