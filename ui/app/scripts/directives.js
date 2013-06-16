@@ -61,7 +61,6 @@ angular.module('dirvishStatsApp')
       scope.$watch(attr.barChart, function(data) {
 
         var onBarClick = function(image) {
-          scope.currentImage = image;
           location.hash = '#/hosts/'+$state.params.hostId+'/images/'+image.id
         };
 
