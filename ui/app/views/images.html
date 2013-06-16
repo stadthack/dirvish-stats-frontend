@@ -1,5 +1,6 @@
 <div ng-controller="ImagesCtrl">
   <div class="nav-header">Host: "{{$state.params.hostId}}"</div>
+  <span ng-hide="trendImages">Loading…</span>
   <div bar-chart="trendImages"></div>
   <hr>
   <div ui-view="imagesDetail"></div>
