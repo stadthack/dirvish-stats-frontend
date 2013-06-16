@@ -30,16 +30,31 @@ var width = 800,
 
 var div = d3.select(el[0]);
 
-div.select("img").remove();
+var breadcrumps = div.append("ul")
+  .attr("class", "breadcrumb sunburst-breadcrumb")
+  .style("visibility", "hidden");
+breadcrumps.renderNode = function(node) {
+  this.style("visibility", "visible");
+  this.selectAll("li").append("span").remove()
+  if(!node.depth) {
+    this.append("li").text("/")
+    return
+  };
+  var me = this;
+  node.path.split("/").forEach(function(s, i) {
+    me.append("li")
+    .text(s)
+    .append("span")
+    .attr("class", "divider")
+    .text(function() { return i ? "/" : ""; })
+  })
+}
 
 var vis = div.append("svg")
     .attr("width", width + padding * 2)
     .attr("height", height + padding * 2)
     .append("g")
     .attr("transform", "translate(" + [radius + padding, radius + padding] + ")");
-
-// div.append("p")
-//     .text("Click to zoom!");
 
 var tooltip = div
   .append("div")
@@ -50,7 +65,6 @@ var tooltip = div
 
 tooltip.path = tooltip.append("div")
 tooltip.size = tooltip.append("div")
-
 
   vis
   .on("mouseover", function(){return tooltip.style("visibility", "visible");})
@@ -68,10 +82,20 @@ var arc = d3.svg.arc()
     .innerRadius(function(d) { return Math.max(0, d.y ? y(d.y) : d.y); })
     .outerRadius(function(d) { return Math.max(0, y(d.y + d.dy)); });
 
+function click(d) {
+  breadcrumps.renderNode(d);
+  path.transition()
+    .duration(duration)
+    .attrTween("d", arcTween(d));
+}
+
+var path;
+
 (function(json) {
   var nodes = partition.nodes(json);
+  breadcrumps.renderNode(nodes[0])
 
-  var path = vis.selectAll("path").data(nodes);
+  path = vis.selectAll("path").data(nodes);
   path.enter().append("path")
     .attr("class", "sunburst-segment")
     .attr("id", function(d, i) { return "path-" + i; })
@@ -79,13 +103,10 @@ var arc = d3.svg.arc()
     .attr("fill-rule", "evenodd")
     .style("fill", colour)
     .on("click", click)
-    .on("mouseover", function(d){ tooltip.path.text(d.path); tooltip.size.text(App.helpers.humanReadableFileSize(d.size)); });
-
-  function click(d) {
-    path.transition()
-      .duration(duration)
-      .attrTween("d", arcTween(d));
-  }
+    .on("mouseover", function(d){
+      tooltip.path.text(d.path);
+      tooltip.size.text(App.helpers.humanReadableFileSize(d.size));
+    });
 })(data);
 
 function isParentOf(p, c) {
