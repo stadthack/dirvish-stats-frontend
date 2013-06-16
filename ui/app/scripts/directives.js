@@ -6,7 +6,7 @@ angular.module('dirvishStatsApp')
       link: function(scope, el, attr) {
         var margin = {top: 20, right: 20, bottom: 80, left: 80},
             width = 720 - margin.left - margin.right,
-            height = 320 - margin.top - margin.bottom;
+            height = 260 - margin.top - margin.bottom;
 
         var formatHumanReadable = function(bytes) {
           if (bytes == 0) {

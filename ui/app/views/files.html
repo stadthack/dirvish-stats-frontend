@@ -1,7 +1,15 @@
 <div ng-controller="FilesCtrl">
 
-  <h3>Top {{size}} largest files</h3>
-  <h5 class="shade">{{currentImage.time}}</h5>
+  <h3>
+    Image contents
+    <!-- TODO Show something like currentImage.time -->
+  </h3>
+
+  <div sunburst data="treeData">
+    <span ng-hide="treeData">Loading…</span>
+  </div>
+
+  <div class="nav-header">Top {{size}} largest files</div>
 
   <input type="range" min="5" max="100" ng-model="size">
 
@@ -19,5 +27,6 @@
       </tr>
     </tbody>
   </table>
+
 
 </div>

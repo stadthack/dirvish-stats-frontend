@@ -9,4 +9,9 @@ angular.module('dirvishStatsApp')
     $http.get(API_SERVER + "/top?hostname=" + hostId + "&image=" + imageId + "&size=100").success(function(data) {
       $scope.files = data.files;
     });
+
+    $http.get(API_SERVER + "/details?hostname=" + hostId + "&image=" + imageId).success(function(data) {
+      $scope.treeData = data;
+    });
+
   });
