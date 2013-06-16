@@ -25,21 +25,21 @@ var width = 800,
     radius = width / 2,
     x = d3.scale.linear().range([0, 2 * Math.PI]),
     y = d3.scale.pow().exponent(1.3).domain([0, 1]).range([0, radius]),
-    padding = 5,
+    padding = 0,
     duration = 1000;
 
 var div = d3.select(el[0]);
 
 div.select("img").remove();
 
-div.append("p")
-    .text("Click to zoom!");
-
 var vis = div.append("svg")
     .attr("width", width + padding * 2)
     .attr("height", height + padding * 2)
     .append("g")
     .attr("transform", "translate(" + [radius + padding, radius + padding] + ")");
+
+// div.append("p")
+//     .text("Click to zoom!");
 
 var tooltip = div
   .append("div")
