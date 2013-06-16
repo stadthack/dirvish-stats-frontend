@@ -29,3 +29,15 @@ body {
 .x.axis path {
   display: none;
 }
+
+
+.sunburst-tooltip {
+  background-color: #fcf7e6;
+  padding: 3px;
+}
+.sunburst-segment {
+  transition: opacity 150ms;
+}
+.sunburst-segment:hover {
+  opacity: 0.6;
+}

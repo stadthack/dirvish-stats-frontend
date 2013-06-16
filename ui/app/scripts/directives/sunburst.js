@@ -14,7 +14,7 @@ angular.module('dirvishStatsApp')
   });
 
 function buildSunburst(el, data) {
-  var data = [data];
+  // var data = [data];
 
 // Based on:
 // Coffee Flavour Wheel by Jason Davies,
@@ -48,6 +48,10 @@ var tooltip = div
   .style("z-index", "10")
   .style("visibility", "hidden");
 
+tooltip.path = tooltip.append("div")
+tooltip.size = tooltip.append("div")
+
+
   vis
   .on("mouseover", function(){return tooltip.style("visibility", "visible");})
   .on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
@@ -65,16 +69,17 @@ var arc = d3.svg.arc()
     .outerRadius(function(d) { return Math.max(0, y(d.y + d.dy)); });
 
 (function(json) {
-  var nodes = partition.nodes({childs: json});
+  var nodes = partition.nodes(json);
 
   var path = vis.selectAll("path").data(nodes);
   path.enter().append("path")
-      .attr("id", function(d, i) { return "path-" + i; })
-      .attr("d", arc)
-      .attr("fill-rule", "evenodd")
-      .style("fill", colour)
-      .on("click", click)
-      .on("mouseover", function(d){ tooltip.text(d.path); });
+    .attr("class", "sunburst-segment")
+    .attr("id", function(d, i) { return "path-" + i; })
+    .attr("d", arc)
+    .attr("fill-rule", "evenodd")
+    .style("fill", colour)
+    .on("click", click)
+    .on("mouseover", function(d){ tooltip.path.text(d.path); tooltip.size.text(App.helpers.humanReadableFileSize(d.size)); });
 
   function click(d) {
     path.transition()

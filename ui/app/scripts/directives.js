@@ -8,15 +8,6 @@ angular.module('dirvishStatsApp')
             width = 720 - margin.left - margin.right,
             height = 260 - margin.top - margin.bottom;
 
-        var formatHumanReadable = function(bytes) {
-          if (bytes == 0) {
-            return "0 bytes";
-          }
-          var s = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'];
-          var e = Math.floor(Math.log(bytes) / Math.log(1024));
-          return (bytes / Math.pow(1024, Math.floor(e))).toFixed(2) + " " + s[e];
-        };
-
         function isValidDate(d) {
           if ( Object.prototype.toString.call(d) !== "[object Date]" )
             return false;
@@ -50,7 +41,7 @@ angular.module('dirvishStatsApp')
         var yAxis = d3.svg.axis()
             .scale(y)
             .orient("left")
-            .tickFormat(formatHumanReadable);
+            .tickFormat(App.helpers.humanReadableFileSize);
 
         var svg = d3.select(el[0]).append("svg")
             .attr("width", width + margin.left + margin.right)
