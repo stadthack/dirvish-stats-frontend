@@ -49,11 +49,15 @@ angular.module('dirvishStatsApp')
           .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      scope.$watch(attr.barChart, function(data) {
-
         var onBarClick = function(image) {
+          // // TODO Move somewhere else. This does not support deep-linking.
+          svg.selectAll(".bar")
+          .classed("active", function(d) { return d.id == image.id })
+
           location.hash = '#/hosts/'+$state.params.hostId+'/images/'+image.id
         };
+
+      scope.$watch(attr.barChart, function(data) {
 
           x.domain(data.map(function(d) { return d.time; }));
           y.domain([0, d3.max(data, function(d) { return d.sum; })]);
@@ -63,7 +67,7 @@ angular.module('dirvishStatsApp')
               .attr("transform", "translate(0," + height + ")")
               .call(xAxis)
               .selectAll('text')
-              .attr("transform", " translate(-33, 28) rotate(-45)");
+              .attr("transform", " translate(-33, 26) rotate(-45)");
 
           svg.append("g")
               .attr("class", "y axis")
@@ -71,8 +75,8 @@ angular.module('dirvishStatsApp')
 
           svg.selectAll(".bar")
               .data(data)
-            .enter().append("rect")
-              .attr("class", "bar")
+              .enter().append("rect")
+              .classed("bar", true)
               .attr("x", function(d) { return x(d.time); })
               .attr("width", x.rangeBand())
               .attr("y", function(d) { return y(d.sum); })

@@ -21,7 +21,8 @@ body {
   transition: 150ms;
 }
 
-.bar:hover {
+.bar:hover,
+.bar.active {
   cursor: pointer;
   fill: #79b1e6;
 }

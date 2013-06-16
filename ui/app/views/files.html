@@ -1,9 +1,8 @@
 <div ng-controller="FilesCtrl">
 
-  <h3 class="nav-header">
-    Image contents
-    <!-- TODO Show something like currentImage.time -->
-  </h3>
+  <div class="nav-header">
+    Image {{currentImage.time}}
+  </div>
 
   <div sunburst data="treeData">
     <span ng-hide="treeData">Loading…</span>
@@ -27,6 +26,5 @@
       </tr>
     </tbody>
   </table>
-
 
 </div>
