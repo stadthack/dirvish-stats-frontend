@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dirvishStatsApp')
-  .directive('sunburst', function($state) {
+  .directive('sunburst', function($state, $filter) {
     return {
       link: function(scope, el, attr) {
         scope.$watch(attr.data, function(data) {
@@ -105,7 +105,7 @@ var path;
     .on("click", click)
     .on("mouseover", function(d){
       tooltip.path.text(d.path);
-      tooltip.size.text(App.helpers.humanReadableFileSize(d.size));
+      tooltip.size.text($filter('humanReadableBytes'));
     });
 })(data);
 

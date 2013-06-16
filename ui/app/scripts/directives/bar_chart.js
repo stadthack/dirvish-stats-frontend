@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dirvishStatsApp')
-  .directive('barChart', function($state) {
+  .directive('barChart', function($state, $filter) {
     return {
       link: function(scope, el, attr) {
         var margin = {top: 20, right: 20, bottom: 80, left: 80},
@@ -41,7 +41,7 @@ angular.module('dirvishStatsApp')
         var yAxis = d3.svg.axis()
             .scale(y)
             .orient("left")
-            .tickFormat(App.helpers.humanReadableFileSize);
+            .tickFormat($filter('humanReadableBytes'));
 
         var svg = d3.select(el[0]).append("svg")
             .attr("width", width + margin.left + margin.right)
