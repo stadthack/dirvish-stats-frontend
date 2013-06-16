@@ -63,7 +63,7 @@ angular.module('dirvishStatsApp')
               .attr("transform", "translate(0," + height + ")")
               .call(xAxis)
               .selectAll('text')
-              .attr("transform", " translate(-13, 44) rotate(-90)");
+              .attr("transform", " translate(-33, 28) rotate(-45)");
 
           svg.append("g")
               .attr("class", "y axis")
