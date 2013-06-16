@@ -1,6 +1,6 @@
 'use strict';
 
-// TODO Where to put this?
+// TODO: Where to put this?
 this.App = {}
 App.helpers = {
   humanReadableFileSize: function(bytes) {

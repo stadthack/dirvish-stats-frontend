@@ -8,13 +8,13 @@ angular.module('dirvishStatsApp')
             width = 720 - margin.left - margin.right,
             height = 260 - margin.top - margin.bottom;
 
-        function isValidDate(d) {
+        var isValidDate = function(d) {
           if ( Object.prototype.toString.call(d) !== "[object Date]" )
             return false;
           return !isNaN(d.getTime());
         }
 
-        function formatDate(date) {
+        var formatDate = function(date) {
           var d;
           try {
             d = new Date(date);
@@ -50,9 +50,9 @@ angular.module('dirvishStatsApp')
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
         var onBarClick = function(image) {
-          // // TODO Move somewhere else. This does not support deep-linking.
+          // TODO: Move somewhere else. This does not support deep-linking.
           svg.selectAll(".bar")
-          .classed("active", function(d) { return d.id == image.id })
+            .classed("active", function(d) { return d.id == image.id })
 
           location.hash = '#/hosts/'+$state.params.hostId+'/images/'+image.id
         };
